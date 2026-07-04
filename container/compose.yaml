@@ -1,0 +1,8 @@
+﻿services:
+  monomaint:
+    build:
+      context: ..
+      dockerfile: container/Dockerfile
+    image: monomaint:dev
+    ports:
+      - "8080:8080"

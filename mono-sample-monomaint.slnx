@@ -1,0 +1,19 @@
+<Solution>
+  <Folder Name="/.github/" />
+  <Folder Name="/.github/workflows/" />
+  <Folder Name="/container/">
+    <File Path="container/Dockerfile" />
+  </Folder>
+  <Folder Name="/installer/" />
+  <Folder Name="/installer/ubuntu/" />
+  <Folder Name="/installer/windows/" />
+  <Folder Name="/src/">
+    <Project Path="src/MonoMaint.Host/MonoMaint.Host.csproj" />
+  </Folder>
+  <Folder Name="/tests/" />
+  <Folder Name="/ソリューション項目/">
+    <File Path=".gitignore" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+  </Folder>
+</Solution>
