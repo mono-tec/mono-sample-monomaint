@@ -1,7 +1,32 @@
 ﻿@page "/"
+@using MonoMaint.Core
+@inject PluginRegistry PluginRegistry
 
-<PageTitle>Home</PageTitle>
+<PageTitle>MonoMaint Sample</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>MonoMaint Sample</h1>
 
-Welcome to your new app.
+<p>Plugin-based maintenance platform sample application.</p>
+
+<h2>Registered Plugins</h2>
+
+@if (PluginRegistry.Plugins.Count == 0)
+{
+    <p>No plugins registered.</p>
+}
+else
+{
+    <ul>
+        @foreach (var plugin in PluginRegistry.Plugins)
+        {
+            <li>
+                <strong>@plugin.Manifest.Name</strong><br />
+                <span>@plugin.Manifest.Description</span><br />
+                <small>
+                    ID: @plugin.Manifest.Id /
+                    Version: @plugin.Manifest.Version
+                </small>
+            </li>
+        }
+    </ul>
+}

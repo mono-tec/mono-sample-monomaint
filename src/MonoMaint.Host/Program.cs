@@ -1,10 +1,19 @@
+using MonoMaint.Core;
 using MonoMaint.Host.Components;
+using MonoMaint.Plugin.Sample;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddSingleton<PluginRegistry>(_ =>
+{
+    var registry = new PluginRegistry();
+    registry.Add(new SamplePlugin());
+    return registry;
+});
 
 var app = builder.Build();
 

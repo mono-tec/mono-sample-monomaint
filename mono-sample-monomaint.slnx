@@ -8,6 +8,9 @@
   <Folder Name="/installer/ubuntu/" />
   <Folder Name="/installer/windows/" />
   <Folder Name="/src/">
+    <Project Path="MonoMaint.Abstractions/MonoMaint.Abstractions.csproj" />
+    <Project Path="MonoMaint.Core/MonoMaint.Core.csproj" />
+    <Project Path="MonoMaint.Plugin.Sample/MonoMaint.Plugin.Sample.csproj" />
     <Project Path="src/MonoMaint.Host/MonoMaint.Host.csproj" />
   </Folder>
   <Folder Name="/tests/" />

@@ -7,4 +7,10 @@
     <BlazorDisableThrowNavigationException>true</BlazorDisableThrowNavigationException>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\MonoMaint.Abstractions\MonoMaint.Abstractions.csproj" />
+    <ProjectReference Include="..\..\MonoMaint.Core\MonoMaint.Core.csproj" />
+    <ProjectReference Include="..\..\MonoMaint.Plugin.Sample\MonoMaint.Plugin.Sample.csproj" />
+  </ItemGroup>
+
 </Project>
