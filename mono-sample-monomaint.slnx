@@ -4,6 +4,9 @@
   <Folder Name="/container/">
     <File Path="container/Dockerfile" />
   </Folder>
+  <Folder Name="/docs/">
+    <File Path="docs/render-deployment.md" />
+  </Folder>
   <Folder Name="/installer/" />
   <Folder Name="/installer/ubuntu/" />
   <Folder Name="/installer/windows/" />
