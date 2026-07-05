@@ -1,4 +1,10 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@using Microsoft.AspNetCore.Components
+@using MonoMaint.Abstractions
+@using MonoMaint.Core
+@using MonoMaint.Host.Components.Icons
+@inject PluginRegistry PluginRegistry
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="">MonoMaint.Host</a>
     </div>
@@ -13,6 +19,25 @@
                 <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
             </NavLink>
         </div>
+        <div class="nav-item px-3 mt-3">
+            <span class="nav-link disabled">
+                @((MarkupString)PluginIconRenderer.GetSvg(PluginIcon.Plugin))
+                Plugins
+            </span>
+  
+            @foreach (var plugin in PluginRegistry.Plugins)
+            {
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="@plugin.Manifest.Route">
+                        @((MarkupString)PluginIconRenderer.GetSvg(plugin.Manifest.Icon))
+                        @plugin.Manifest.Name
+                    </NavLink>
+                </div>
+            }
+
+        </div>
+
+
 
     </nav>
 </div>

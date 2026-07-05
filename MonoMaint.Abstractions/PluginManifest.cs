@@ -8,9 +8,8 @@ namespace MonoMaint.Abstractions
     /// MonoMaint プラグインのマニフェストを表します。
     /// </summary>
     /// <remarks>
-    /// プラグインの識別情報や表示情報など、Host がプラグインを
-    /// 管理・表示するために必要なメタデータを保持します。
-    /// 本クラスはイミュータブルオブジェクトとして record を採用しています。
+    /// Host がプラグインを識別・表示するための基本情報を保持します。
+    /// 本クラスはイミュータブルオブジェクトとして実装しています。
     /// </remarks>
     /// <param name="Id">
     /// プラグインを一意に識別するIDです。
@@ -24,9 +23,17 @@ namespace MonoMaint.Abstractions
     /// <param name="Version">
     /// プラグインのバージョンです。
     /// </param>
+    /// <param name="Route">
+    /// プラグイン画面へ遷移するためのルートURLです。
+    /// </param>
+    /// <param name="Icon">
+    /// プラグインのアイコンです。
+    /// </param>
     public sealed record PluginManifest(
-        string Id,
-        string Name,
-        string Description,
-        string Version);   
+       string Id,
+       string Name,
+       string Description,
+       string Version,
+       string Route,
+       PluginIcon Icon);
 }

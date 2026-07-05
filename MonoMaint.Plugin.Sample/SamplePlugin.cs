@@ -3,10 +3,12 @@
 namespace MonoMaint.Plugin.Sample
 {
     /// <summary>
-    /// MonoMaint サンプルプラグインです。
+    /// MonoMaint のサンプルプラグインです。
     /// </summary>
     /// <remarks>
-    /// Plugin SDK の実装例として使用します。
+    /// Plugin SDK の実装例として利用します。
+    /// 本プラグインは、PluginManifest・PluginRegistry・
+    /// Plugin Menu の動作確認を目的としています。
     /// </remarks>
     public sealed class SamplePlugin : IMonoMaintPlugin
     {
@@ -18,6 +20,8 @@ namespace MonoMaint.Plugin.Sample
                 Id: "sample",
                 Name: "Sample Plugin",
                 Description: "MonoMaint Plugin SDK sample.",
-                Version: "0.1.0");
+                Version: "0.1.0",
+                Route: "/plugins/sample",
+                Icon: PluginIcon.Plugin);
     }
 }
