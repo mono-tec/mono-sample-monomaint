@@ -11,10 +11,16 @@
   <Folder Name="/installer/ubuntu/" />
   <Folder Name="/installer/windows/" />
   <Folder Name="/src/">
-    <Project Path="MonoMaint.Abstractions/MonoMaint.Abstractions.csproj" />
-    <Project Path="MonoMaint.Core/MonoMaint.Core.csproj" />
-    <Project Path="MonoMaint.Plugin.Sample/MonoMaint.Plugin.Sample.csproj" />
+    <Project Path="src/MonoMaint.Abstractions/MonoMaint.Abstractions.csproj" />
+    <Project Path="src/MonoMaint.Core/MonoMaint.Core.csproj" />
     <Project Path="src/MonoMaint.Host/MonoMaint.Host.csproj" />
+  </Folder>
+  <Folder Name="/src/Plugins/">
+    <Project Path="src/Plugins/MonoMaint.Plugin.DiskMonitor/MonoMaint.Plugin.DiskMonitor.csproj" Id="875502af-b772-4ab3-ab5e-eb83965f546e" />
+    <Project Path="src/Plugins/MonoMaint.Plugin.HealthDashboard/MonoMaint.Plugin.HealthDashboard.csproj" Id="86dbe388-1ffb-4951-82f2-0fb0983850d7" />
+    <Project Path="src/Plugins/MonoMaint.Plugin.LogViewer/MonoMaint.Plugin.LogViewer.csproj" Id="7e214da6-d27d-4b45-832b-b0efeb452ca5" />
+    <Project Path="src/Plugins/MonoMaint.Plugin.Sample/MonoMaint.Plugin.Sample.csproj" />
+    <Project Path="src/Plugins/MonoMaint.Plugin.Settings/MonoMaint.Plugin.Settings.csproj" Id="54c2c668-9ace-4b6c-8a38-136933988346" />
   </Folder>
   <Folder Name="/tests/" />
   <Folder Name="/ソリューション項目/">

@@ -5,9 +5,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <PropertyGroup>
+    <Company>mono-tec</Company>
+    <Product>MonoMaint.Core</Product>
+    <Authors>mono-tec</Authors>
+    <Copyright>Copyright © 2026 mono-tec</Copyright>
 
+    <Version>0.1.0</Version>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <FileVersion>0.1.0.0</FileVersion>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\MonoMaint.Abstractions\MonoMaint.Abstractions.csproj" />
   </ItemGroup>
+
 
 </Project>

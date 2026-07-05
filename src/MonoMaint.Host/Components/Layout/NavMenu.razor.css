@@ -32,8 +32,12 @@
 
 /* アプリケーション名 */
 .navbar-brand {
-    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     color: var(--mm-text-inverse);
+    font-size: 1.1rem;
+    font-weight: 600;
 }
 
 /* Bootstrap Icons互換の既定アイコン表示 */
@@ -128,3 +132,13 @@
         overflow-y: auto;
     }
 }
+
+/* アプリケーションロゴ */
+.brand-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+}
+
+

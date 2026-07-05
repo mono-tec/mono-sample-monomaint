@@ -1,6 +1,10 @@
 using MonoMaint.Core;
 using MonoMaint.Host.Components;
+using MonoMaint.Plugin.DiskMonitor;
+using MonoMaint.Plugin.HealthDashboard;
+using MonoMaint.Plugin.LogViewer;
 using MonoMaint.Plugin.Sample;
+using MonoMaint.Plugin.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +15,19 @@ builder.Services.AddRazorComponents()
 builder.Services.AddSingleton<PluginRegistry>(_ =>
 {
     var registry = new PluginRegistry();
-    registry.Add(new SamplePlugin());
+
+    var plugins = PluginDiscovery.Discover(
+        typeof(SamplePlugin).Assembly,
+        typeof(DiskMonitorPlugin).Assembly,
+        typeof(LogViewerPlugin).Assembly,
+        typeof(HealthDashboardPlugin).Assembly,
+        typeof(SettingsPlugin).Assembly);
+
+    foreach (var plugin in plugins)
+    {
+        registry.Add(plugin);
+    }
+
     return registry;
 });
 
