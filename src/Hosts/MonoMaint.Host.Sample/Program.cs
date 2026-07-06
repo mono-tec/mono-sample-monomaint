@@ -1,5 +1,5 @@
 using MonoMaint.Core;
-using MonoMaint.Host.Components;
+using MonoMaint.Host.Sample.Components;
 using MonoMaint.Plugin.DiskMonitor;
 using MonoMaint.Plugin.HealthDashboard;
 using MonoMaint.Plugin.LogViewer;

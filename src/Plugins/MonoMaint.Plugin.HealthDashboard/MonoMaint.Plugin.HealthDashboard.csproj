@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\MonoMaint.Abstractions\MonoMaint.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Platform\MonoMaint.Abstractions\MonoMaint.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

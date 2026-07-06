@@ -7,14 +7,17 @@
   <Folder Name="/docs/">
     <File Path="docs/render-deployment.md" />
   </Folder>
+  <Folder Name="/Hosts/">
+    <Project Path="src/Hosts/MonoMaint.Host.Sample/MonoMaint.Host.Sample.csproj" />
+  </Folder>
   <Folder Name="/installer/" />
   <Folder Name="/installer/ubuntu/" />
   <Folder Name="/installer/windows/" />
-  <Folder Name="/src/">
-    <Project Path="src/MonoMaint.Abstractions/MonoMaint.Abstractions.csproj" />
-    <Project Path="src/MonoMaint.Core/MonoMaint.Core.csproj" />
-    <Project Path="src/MonoMaint.Host/MonoMaint.Host.csproj" />
+  <Folder Name="/Platform/">
+    <Project Path="src/Platform/MonoMaint.Abstractions/MonoMaint.Abstractions.csproj" />
+    <Project Path="src/Platform/MonoMaint.Core/MonoMaint.Core.csproj" />
   </Folder>
+  <Folder Name="/src/" />
   <Folder Name="/src/Plugins/">
     <Project Path="src/Plugins/MonoMaint.Plugin.DiskMonitor/MonoMaint.Plugin.DiskMonitor.csproj" Id="875502af-b772-4ab3-ab5e-eb83965f546e" />
     <Project Path="src/Plugins/MonoMaint.Plugin.HealthDashboard/MonoMaint.Plugin.HealthDashboard.csproj" Id="86dbe388-1ffb-4951-82f2-0fb0983850d7" />

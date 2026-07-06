@@ -15,8 +15,8 @@ WORKDIR /src
 
 COPY . .
 
-RUN dotnet restore ./src/MonoMaint.Host/MonoMaint.Host.csproj
-RUN dotnet publish ./src/MonoMaint.Host/MonoMaint.Host.csproj \
+RUN dotnet restore ./src/MonoMaint.Host.Sample/MonoMaint.Host.Sample.csproj
+RUN dotnet publish ./src/MonoMaint.Host.Sample/MonoMaint.Host.Sample.csproj \
     -c Release \
     -o /app/publish \
     --no-restore
