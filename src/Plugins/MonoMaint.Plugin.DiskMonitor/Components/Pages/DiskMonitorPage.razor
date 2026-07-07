@@ -1,0 +1,75 @@
+﻿@page "/plugins/disk-monitor"
+@using MonoMaint.Plugin.DiskMonitor.Services
+@inject IDiskInfoService DiskInfoService
+
+<PageTitle>Disk Monitor</PageTitle>
+
+<h1>Disk Monitor</h1>
+
+<p>Displays disk usage information.</p>
+
+@if (_disks.Count == 0)
+{
+    <p>No disk information available.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Drive</th>
+                <th>Total</th>
+                <th>Free</th>
+                <th>Used</th>
+                <th>Used %</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var disk in _disks)
+            {
+                <tr>
+                    <td>@disk.Name</td>
+                    <td>@FormatSize(disk.TotalSize)</td>
+                    <td>@FormatSize(disk.FreeSpace)</td>
+                    <td>@FormatSize(disk.UsedSize)</td>
+                    <td style="width:220px">
+                        <div class="progress">
+                            <div class="progress-bar @GetProgressColor(disk.UsedPercent)"
+                                 role="progressbar"
+                                 style="width:@($"{disk.UsedPercent:0.0}%")">
+
+                                @disk.UsedPercent.ToString("0.0")%
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IReadOnlyList<Models.DiskInfo> _disks = [];
+
+    protected override void OnInitialized()
+    {
+        _disks = DiskInfoService.GetDisks();
+    }
+
+    private static string FormatSize(long bytes)
+    {
+        var gb = bytes / 1024d / 1024d / 1024d;
+        return $"{gb:0.0} GB";
+    }
+    private static string GetProgressColor(double usedPercent)
+    {
+        if (usedPercent >= 90)
+            return "bg-danger";
+
+        if (usedPercent >= 70)
+            return "bg-warning";
+
+        return "bg-success";
+    }
+}

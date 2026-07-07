@@ -12,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+builder.Services.AddDiskMonitorPlugin();
 builder.Services.AddSingleton<PluginRegistry>(_ =>
 {
     var registry = new PluginRegistry();
@@ -47,6 +48,12 @@ app.UseAntiforgery();
 
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+    .AddInteractiveServerRenderMode()
+    .AddAdditionalAssemblies(
+        typeof(SamplePlugin).Assembly,
+        typeof(DiskMonitorPlugin).Assembly,
+        typeof(LogViewerPlugin).Assembly,
+        typeof(HealthDashboardPlugin).Assembly,
+        typeof(SettingsPlugin).Assembly);
 
 app.Run();

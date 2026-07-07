@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <Company>mono-tec</Company>
-    <Product>MonoMaint.Host</Product>
+    <Product>MonoMaint.Host.Sample</Product>
     <Authors>mono-tec</Authors>
     <Copyright>Copyright © 2026 mono-tec</Copyright>
 
