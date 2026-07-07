@@ -15,8 +15,8 @@ WORKDIR /src
 
 COPY . .
 
-RUN dotnet restore ./src/MonoMaint.Host.Sample/MonoMaint.Host.Sample.csproj
-RUN dotnet publish ./src/MonoMaint.Host.Sample/MonoMaint.Host.Sample.csproj \
+RUN dotnet restore ./src/Hosts/MonoMaint.Host.Sample/MonoMaint.Host.Sample.csproj
+RUN dotnet publish ./src/Hosts/MonoMaint.Host.Sample/MonoMaint.Host.Sample.csproj \
     -c Release \
     -o /app/publish \
     --no-restore
@@ -27,4 +27,4 @@ WORKDIR /app
 
 COPY --from=build /app/publish .
 
-ENTRYPOINT ["dotnet", "MonoMaint.Host.dll"]
+ENTRYPOINT ["dotnet", "MonoMaint.Host.Sample.dll"]
