@@ -1,7 +1,38 @@
 #!/bin/sh
+set -e
+
+SERVICE_USER="monomaint"
+SERVICE_GROUP="monomaint"
+APP_DIR="/opt/monomaint"
+SERVICE_NAME="monomaint-sample.service"
+
+echo "Creating service group: ${SERVICE_GROUP}"
+
+if ! getent group "${SERVICE_GROUP}" >/dev/null 2>&1; then
+    groupadd --system "${SERVICE_GROUP}"
+fi
+
+echo "Creating service user: ${SERVICE_USER}"
+
+if ! getent passwd "${SERVICE_USER}" >/dev/null 2>&1; then
+    useradd \
+        --system \
+        --gid "${SERVICE_GROUP}" \
+        --home-dir "${APP_DIR}" \
+        --shell /usr/sbin/nologin \
+        "${SERVICE_USER}"
+fi
+
+echo "Setting application ownership..."
+
+chown -R "${SERVICE_USER}:${SERVICE_GROUP}" "${APP_DIR}"
+
+echo "Reloading systemd..."
 
 systemctl daemon-reload
-systemctl enable monomaint-sample.service
-systemctl restart monomaint-sample.service
+systemctl enable "${SERVICE_NAME}"
+systemctl restart "${SERVICE_NAME}"
+
+echo "MonoMaint installation completed."
 
 exit 0
