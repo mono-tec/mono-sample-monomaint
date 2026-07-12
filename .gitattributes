@@ -61,3 +61,16 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+###############################################################################
+# Linux packaging
+###############################################################################
+
+# Shell Script
+*.sh text eol=lf
+
+# systemd Unit
+*.service text eol=lf
+
+# Debian package
+installer/ubuntu/package/DEBIAN/* text eol=lf

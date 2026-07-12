@@ -12,11 +12,14 @@ set -euo pipefail
 # MonoMaint.Host.Sample.csproj に定義された Version を正とします。
 #
 # 処理概要
-#   1. プロジェクトファイルからVersionを取得
-#   2. DEBIAN/controlを動的生成
-#   3. publish成果物をパッケージ領域へコピー
-#   4. メンテナンススクリプトへ実行権限を付与
-#   5. dpkg-debで.debパッケージを生成
+#   1. 入力ファイルを確認
+#   2. プロジェクトファイルからVersionを取得
+#   3. パッケージ作業領域を初期化
+#   4. DEBIAN/controlを動的生成
+#   5. publish成果物をパッケージ領域へコピー
+#   6. Linux用ファイルの改行・BOMを正規化
+#   7. メンテナンススクリプトへ実行権限を付与
+#   8. dpkg-debで.debパッケージを生成
 ############################################################
 
 
@@ -46,6 +49,14 @@ APPLICATION_DIR="${PACKAGE_ROOT}/opt/monomaint"
 DEBIAN_DIR="${PACKAGE_ROOT}/DEBIAN"
 CONTROL_FILE="${DEBIAN_DIR}/control"
 
+# Debianメンテナンススクリプト
+POSTINST_FILE="${DEBIAN_DIR}/postinst"
+PRERM_FILE="${DEBIAN_DIR}/prerm"
+POSTRM_FILE="${DEBIAN_DIR}/postrm"
+
+# systemd Unitファイル
+SERVICE_FILE="${PACKAGE_ROOT}/lib/systemd/system/monomaint-sample.service"
+
 # 生成した.debの出力先
 OUTPUT_DIR="${SCRIPT_DIR}/output"
 
@@ -54,22 +65,11 @@ OUTPUT_DIR="${SCRIPT_DIR}/output"
 # パッケージ情報
 ############################################################
 
-# Debianパッケージ名
 PACKAGE_NAME="monomaint-sample"
-
-# DebianパッケージのCPUアーキテクチャ
 PACKAGE_ARCHITECTURE="amd64"
-
-# Debianパッケージの分類
 PACKAGE_SECTION="web"
-
-# パッケージ管理者
 PACKAGE_MAINTAINER="mono-tec"
-
-# 実行に必要な依存パッケージ
 PACKAGE_DEPENDS="aspnetcore-runtime-10.0"
-
-# パッケージ説明
 PACKAGE_DESCRIPTION="MonoMaint Sample application"
 
 
@@ -89,6 +89,30 @@ if [[ ! -d "${PUBLISH_DIR}" ]]; then
     exit 1
 fi
 
+if [[ ! -f "${POSTINST_FILE}" ]]; then
+    echo "ERROR: postinst file was not found."
+    echo "Expected: ${POSTINST_FILE}"
+    exit 1
+fi
+
+if [[ ! -f "${PRERM_FILE}" ]]; then
+    echo "ERROR: prerm file was not found."
+    echo "Expected: ${PRERM_FILE}"
+    exit 1
+fi
+
+if [[ ! -f "${POSTRM_FILE}" ]]; then
+    echo "ERROR: postrm file was not found."
+    echo "Expected: ${POSTRM_FILE}"
+    exit 1
+fi
+
+if [[ ! -f "${SERVICE_FILE}" ]]; then
+    echo "ERROR: systemd Unit file was not found."
+    echo "Expected: ${SERVICE_FILE}"
+    exit 1
+fi
+
 
 ############################################################
 # プロジェクトファイルからVersionを取得
@@ -103,7 +127,7 @@ PACKAGE_VERSION="$(
 )"
 
 # 空白・改行を除去
-PACKAGE_VERSION="$(echo "${PACKAGE_VERSION}" | tr -d '\r\n[:space:]')"
+PACKAGE_VERSION="$(printf '%s' "${PACKAGE_VERSION}" | tr -d '\r\n[:space:]')"
 
 if [[ -z "${PACKAGE_VERSION}" ]]; then
     echo "ERROR: Version could not be read from project file."
@@ -117,9 +141,16 @@ echo "Package version: ${PACKAGE_VERSION}"
 # パッケージ作業領域を初期化
 ############################################################
 
-echo "Cleaning package application directory..."
+echo "Cleaning package build directories..."
 
+# 前回コピーしたpublish成果物を削除
 rm -rf "${APPLICATION_DIR}"
+
+# 前回生成したcontrolを削除
+rm -f "${CONTROL_FILE}"
+
+# 前回生成した.debを削除
+rm -rf "${OUTPUT_DIR}"
 
 mkdir -p "${APPLICATION_DIR}"
 mkdir -p "${DEBIAN_DIR}"
@@ -128,8 +159,6 @@ mkdir -p "${OUTPUT_DIR}"
 
 ############################################################
 # DEBIAN/controlを動的生成
-#
-# 最終行にも改行が入るよう、ヒアドキュメントで生成します。
 ############################################################
 
 echo "Generating Debian control file..."
@@ -146,6 +175,8 @@ Description: ${PACKAGE_DESCRIPTION}
  Plugin-based maintenance platform sample application.
 EOF
 
+chmod 0644 "${CONTROL_FILE}"
+
 
 ############################################################
 # publish成果物をパッケージへコピー
@@ -157,23 +188,42 @@ cp -a "${PUBLISH_DIR}/." "${APPLICATION_DIR}/"
 
 
 ############################################################
+# Linux用ファイルを正規化
+#
+# Windowsで編集した際に混入する可能性がある
+# CRLF改行およびUTF-8 BOMを除去します。
+############################################################
+
+echo "Normalizing Linux text files..."
+
+LINUX_FILES=(
+    "${POSTINST_FILE}"
+    "${PRERM_FILE}"
+    "${POSTRM_FILE}"
+    "${SERVICE_FILE}"
+)
+
+for file in "${LINUX_FILES[@]}"; do
+    # CRLFからLFへ変換
+    sed -i 's/\r$//' "${file}"
+
+    # ファイル先頭のUTF-8 BOMを除去
+    sed -i '1s/^\xEF\xBB\xBF//' "${file}"
+done
+
+
+############################################################
 # Debianメンテナンススクリプトへ実行権限を付与
-#
-# control以外のファイルを対象にします。
-#
-# 例:
-#   postinst
-#   prerm
-#   postrm
 ############################################################
 
 echo "Setting maintainer script permissions..."
 
-find "${DEBIAN_DIR}" \
-    -maxdepth 1 \
-    -type f \
-    ! -name control \
-    -exec chmod 0755 {} \;
+chmod 0755 "${POSTINST_FILE}"
+chmod 0755 "${PRERM_FILE}"
+chmod 0755 "${POSTRM_FILE}"
+
+# Unitファイルは実行ファイルではないため0644
+chmod 0644 "${SERVICE_FILE}"
 
 
 ############################################################

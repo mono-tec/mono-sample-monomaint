@@ -1,7 +1,0 @@
-#!/bin/sh
-
-systemctl daemon-reload
-systemctl enable monomaint-sample.service
-systemctl restart monomaint-sample.service
-
-exit 0

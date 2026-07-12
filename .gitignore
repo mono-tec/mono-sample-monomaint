@@ -504,3 +504,8 @@ Thumbs.db
 
 # Publish output
 /publish/
+
+# Debian build output
+/installer/ubuntu/output/
+/installer/ubuntu/package/opt/monomaint/
+/installer/ubuntu/package/DEBIAN/control

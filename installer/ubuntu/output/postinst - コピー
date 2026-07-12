@@ -1,5 +1,0 @@
-#!/bin/sh
-
-systemctl stop monomaint-sample.service
-
-exit 0

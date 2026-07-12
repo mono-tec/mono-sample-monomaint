@@ -1,7 +1,0 @@
-Package: monomaint-sample
-Version: 0.1.0
-Section: web
-Priority: optional
-Architecture: amd64
-Maintainer: mono-tec
-Description: MonoMaint Sample

@@ -22,9 +22,11 @@
     <File Path="installer/ubuntu/package/DEBIAN/postrm" />
     <File Path="installer/ubuntu/package/DEBIAN/prerm" />
   </Folder>
-  <Folder Name="/installer/ubuntu/package/etc/" />
-  <Folder Name="/installer/ubuntu/package/etc/systemd/" />
-  <Folder Name="/installer/ubuntu/package/etc/systemd/system/" />
+  <Folder Name="/installer/ubuntu/package/lib/" />
+  <Folder Name="/installer/ubuntu/package/lib/systemd/" />
+  <Folder Name="/installer/ubuntu/package/lib/systemd/system/">
+    <File Path="installer/ubuntu/package/lib/systemd/system/monomaint-sample.service" />
+  </Folder>
   <Folder Name="/installer/ubuntu/package/opt/" />
   <Folder Name="/installer/ubuntu/package/opt/monomaint/" />
   <Folder Name="/installer/windows/" />
