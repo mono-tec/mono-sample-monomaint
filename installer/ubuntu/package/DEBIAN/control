@@ -4,4 +4,6 @@ Section: web
 Priority: optional
 Architecture: amd64
 Maintainer: mono-tec
+Depends: aspnetcore-runtime-10.0
 Description: MonoMaint Sample
+ Plugin-based maintenance platform sample application.

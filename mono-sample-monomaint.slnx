@@ -17,7 +17,12 @@
     <File Path="installer/ubuntu/build-deb.sh" />
   </Folder>
   <Folder Name="/installer/ubuntu/package/" />
-  <Folder Name="/installer/ubuntu/package/DEBIAN/" />
+  <Folder Name="/installer/ubuntu/package/DEBIAN/">
+    <File Path="installer/ubuntu/package/DEBIAN/control" />
+    <File Path="installer/ubuntu/package/DEBIAN/postinst" />
+    <File Path="installer/ubuntu/package/DEBIAN/postrm" />
+    <File Path="installer/ubuntu/package/DEBIAN/prerm" />
+  </Folder>
   <Folder Name="/installer/ubuntu/package/etc/" />
   <Folder Name="/installer/ubuntu/package/etc/systemd/" />
   <Folder Name="/installer/ubuntu/package/etc/systemd/system/" />
