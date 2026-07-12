@@ -24,11 +24,13 @@ echo "Copying publish output..."
 cp -a "${PUBLISH_DIR}/." "${APPLICATION_DIR}/"
 
 echo "Setting maintainer script permissions..."
-find "${PACKAGE_ROOT}/DEBIAN" \
-  -maxdepth 1 \
-  -type f \
-  ! -name control \
-  -exec chmod 0755 {} \;
+if [[ -d "${PACKAGE_ROOT}/DEBIAN" ]]; then
+    find "${PACKAGE_ROOT}/DEBIAN" \
+        -maxdepth 1 \
+        -type f \
+        ! -name control \
+        -exec chmod 0755 {} \;
+fi
 
 echo "Building Debian package..."
 dpkg-deb --build \

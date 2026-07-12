@@ -1,0 +1,142 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0/linux-x64",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {},
+    ".NETCoreApp,Version=v10.0/linux-x64": {
+      "MonoMaint.Host.Sample/0.1.0": {
+        "dependencies": {
+          "MonoMaint.Abstractions": "0.1.0",
+          "MonoMaint.Core": "0.1.0",
+          "MonoMaint.Plugin.DiskMonitor": "0.1.0",
+          "MonoMaint.Plugin.HealthDashboard": "0.1.0",
+          "MonoMaint.Plugin.LogViewer": "0.1.0",
+          "MonoMaint.Plugin.Sample": "0.1.0",
+          "MonoMaint.Plugin.Settings": "0.1.0"
+        },
+        "runtime": {
+          "MonoMaint.Host.Sample.dll": {}
+        }
+      },
+      "MonoMaint.Abstractions/0.1.0": {
+        "runtime": {
+          "MonoMaint.Abstractions.dll": {
+            "assemblyVersion": "0.1.0.0",
+            "fileVersion": "0.1.0.0"
+          }
+        }
+      },
+      "MonoMaint.Core/0.1.0": {
+        "dependencies": {
+          "MonoMaint.Abstractions": "0.1.0"
+        },
+        "runtime": {
+          "MonoMaint.Core.dll": {
+            "assemblyVersion": "0.1.0.0",
+            "fileVersion": "0.1.0.0"
+          }
+        }
+      },
+      "MonoMaint.Plugin.DiskMonitor/0.1.0": {
+        "dependencies": {
+          "MonoMaint.Abstractions": "0.1.0"
+        },
+        "runtime": {
+          "MonoMaint.Plugin.DiskMonitor.dll": {
+            "assemblyVersion": "0.1.0.0",
+            "fileVersion": "0.1.0.0"
+          }
+        }
+      },
+      "MonoMaint.Plugin.HealthDashboard/0.1.0": {
+        "dependencies": {
+          "MonoMaint.Abstractions": "0.1.0"
+        },
+        "runtime": {
+          "MonoMaint.Plugin.HealthDashboard.dll": {
+            "assemblyVersion": "0.1.0.0",
+            "fileVersion": "0.1.0.0"
+          }
+        }
+      },
+      "MonoMaint.Plugin.LogViewer/0.1.0": {
+        "dependencies": {
+          "MonoMaint.Abstractions": "0.1.0"
+        },
+        "runtime": {
+          "MonoMaint.Plugin.LogViewer.dll": {
+            "assemblyVersion": "0.1.0.0",
+            "fileVersion": "0.1.0.0"
+          }
+        }
+      },
+      "MonoMaint.Plugin.Sample/0.1.0": {
+        "dependencies": {
+          "MonoMaint.Abstractions": "0.1.0"
+        },
+        "runtime": {
+          "MonoMaint.Plugin.Sample.dll": {
+            "assemblyVersion": "0.1.0.0",
+            "fileVersion": "0.1.0.0"
+          }
+        }
+      },
+      "MonoMaint.Plugin.Settings/0.1.0": {
+        "dependencies": {
+          "MonoMaint.Abstractions": "0.1.0"
+        },
+        "runtime": {
+          "MonoMaint.Plugin.Settings.dll": {
+            "assemblyVersion": "0.1.0.0",
+            "fileVersion": "0.1.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MonoMaint.Host.Sample/0.1.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MonoMaint.Abstractions/0.1.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MonoMaint.Core/0.1.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MonoMaint.Plugin.DiskMonitor/0.1.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MonoMaint.Plugin.HealthDashboard/0.1.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MonoMaint.Plugin.LogViewer/0.1.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MonoMaint.Plugin.Sample/0.1.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MonoMaint.Plugin.Settings/0.1.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
