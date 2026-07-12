@@ -1,7 +1,8 @@
 <Solution>
   <Folder Name="/.github/" />
-  <Folder Name="/.github/workflows/">
-    <File Path=".github/workflows/build-deb.yml" />
+  <Folder Name="/.github/workflows/" />
+  <Folder Name="/.github/workflows/build/">
+    <File Path=".github/workflows/build/build-deb.yml" />
   </Folder>
   <Folder Name="/container/">
     <File Path="container/Dockerfile" />
