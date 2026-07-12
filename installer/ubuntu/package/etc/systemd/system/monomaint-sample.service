@@ -1,0 +1,67 @@
+﻿#======================================================================
+# MonoMaint Sample systemd Service
+#
+# MonoMaint Blazor Server アプリケーションを
+# Linux サービスとして起動するための Unit ファイル
+#======================================================================
+
+[Unit]
+# サービス名称
+Description=MonoMaint Sample
+
+# ネットワーク初期化後に起動する
+After=network.target
+
+
+[Service]
+
+# 通常の常駐プロセスとして起動
+Type=simple
+
+# アプリケーションの作業ディレクトリ
+#
+# appsettings.json
+# wwwroot
+# Logs
+#
+# などはこのディレクトリ基準で参照される
+WorkingDirectory=/opt/monomaint
+
+# 起動コマンド
+#
+# Framework-dependent 配布のため
+# ASP.NET Core Runtime がインストール済みであること
+ExecStart=/usr/bin/dotnet /opt/monomaint/MonoMaint.Host.Sample.dll
+
+# 異常終了時は自動再起動
+Restart=on-failure
+
+# 再起動まで5秒待機
+RestartSec=5
+
+# 実行ユーザー
+#
+# rootではなく専用ユーザーで実行する
+User=monomaint
+Group=monomaint
+
+# ASP.NET Core の待受URL
+#
+# nginx等のリバースプロキシを使用する場合も
+# localhost:8080 等で待受する構成を想定
+Environment=ASPNETCORE_URLS=http://0.0.0.0:8080
+
+# 実行環境
+#
+# Development
+# Staging
+# Production
+#
+# appsettings.{Environment}.json の切替にも利用される
+Environment=DOTNET_ENVIRONMENT=Production
+
+
+[Install]
+
+# OS起動時に自動起動
+WantedBy=multi-user.target

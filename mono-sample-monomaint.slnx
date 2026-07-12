@@ -1,6 +1,8 @@
 <Solution>
   <Folder Name="/.github/" />
-  <Folder Name="/.github/workflows/" />
+  <Folder Name="/.github/workflows/">
+    <File Path=".github/workflows/build-deb.yml" />
+  </Folder>
   <Folder Name="/container/">
     <File Path="container/Dockerfile" />
   </Folder>
@@ -11,12 +13,22 @@
     <Project Path="src/Hosts/MonoMaint.Host.Sample/MonoMaint.Host.Sample.csproj" />
   </Folder>
   <Folder Name="/installer/" />
-  <Folder Name="/installer/ubuntu/" />
+  <Folder Name="/installer/ubuntu/">
+    <File Path="installer/ubuntu/build-deb.sh" />
+  </Folder>
+  <Folder Name="/installer/ubuntu/package/" />
+  <Folder Name="/installer/ubuntu/package/DEBIAN/" />
+  <Folder Name="/installer/ubuntu/package/etc/" />
+  <Folder Name="/installer/ubuntu/package/etc/systemd/" />
+  <Folder Name="/installer/ubuntu/package/etc/systemd/system/" />
+  <Folder Name="/installer/ubuntu/package/opt/" />
+  <Folder Name="/installer/ubuntu/package/opt/monomaint/" />
   <Folder Name="/installer/windows/" />
   <Folder Name="/Platform/">
     <Project Path="src/Platform/MonoMaint.Abstractions/MonoMaint.Abstractions.csproj" />
     <Project Path="src/Platform/MonoMaint.Core/MonoMaint.Core.csproj" />
   </Folder>
+  <Folder Name="/publish/" />
   <Folder Name="/src/" />
   <Folder Name="/src/Plugins/">
     <Project Path="src/Plugins/MonoMaint.Plugin.DiskMonitor/MonoMaint.Plugin.DiskMonitor.csproj" Id="875502af-b772-4ab3-ab5e-eb83965f546e" />
