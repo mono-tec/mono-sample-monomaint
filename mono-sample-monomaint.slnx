@@ -18,7 +18,6 @@
   </Folder>
   <Folder Name="/installer/ubuntu/package/" />
   <Folder Name="/installer/ubuntu/package/DEBIAN/">
-    <File Path="installer/ubuntu/package/DEBIAN/control" />
     <File Path="installer/ubuntu/package/DEBIAN/postinst" />
     <File Path="installer/ubuntu/package/DEBIAN/postrm" />
     <File Path="installer/ubuntu/package/DEBIAN/prerm" />
