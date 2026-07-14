@@ -1,14 +1,20 @@
 name: Build Debian Package
 
 on:
+  # 開発中の手動確認用
   workflow_dispatch:
+
+  # v0.1.0 などのタグをPushしたときにReleaseを作成
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
 
 jobs:
   build-deb:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
 
     steps:
       - name: Checkout repository
@@ -17,7 +23,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: "10.0.x"
 
       - name: Restore
         run: |
@@ -40,10 +46,44 @@ jobs:
           chmod +x ./installer/ubuntu/build-deb.sh
           ./installer/ubuntu/build-deb.sh
 
-      - name: Upload Debian package
+      # タグとcsprojのVersionが一致することを確認
+      - name: Validate tag version
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          PROJECT_VERSION="$(
+            dotnet msbuild \
+              ./src/Hosts/MonoMaint.Host.Sample/MonoMaint.Host.Sample.csproj \
+              -nologo \
+              -getProperty:Version |
+            tr -d '\r\n[:space:]'
+          )"
+
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+
+          echo "Project Version : ${PROJECT_VERSION}"
+          echo "Tag Version     : ${TAG_VERSION}"
+
+          if [ "${PROJECT_VERSION}" != "${TAG_VERSION}" ]; then
+            echo "ERROR: Project version and Git tag version do not match."
+            exit 1
+          fi
+
+      # 手動実行時もActions Artifactとして残す
+      - name: Upload Debian package artifact
         uses: actions/upload-artifact@v4
         with:
           name: monomaint-sample-deb
           path: installer/ubuntu/output/*.deb
           if-no-files-found: error
           retention-days: 14
+
+      # タグPush時だけGitHub Releaseを自動作成
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            installer/ubuntu/output/*.deb \
+            --title "MonoMaint ${GITHUB_REF_NAME}" \
+            --generate-notes
