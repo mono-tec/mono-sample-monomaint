@@ -58,8 +58,7 @@ Environment=ASPNETCORE_URLS=http://0.0.0.0:8080
 # Production
 #
 # appsettings.{Environment}.json の切替にも利用される
-Environment=DOTNET_ENVIRONMENT=Production
-
+Environment=DOTNET_ENVIRONMENT=Linux
 
 [Install]
 

@@ -25,6 +25,9 @@ RUN dotnet publish ./src/Hosts/MonoMaint.Host.Sample/MonoMaint.Host.Sample.cspro
 FROM base AS final
 WORKDIR /app
 
+# Docker / Render向け設定を使用する
+ENV DOTNET_ENVIRONMENT=Container
+
 COPY --from=build /app/publish .
 
 ENTRYPOINT ["dotnet", "MonoMaint.Host.Sample.dll"]
